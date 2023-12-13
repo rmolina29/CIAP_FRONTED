@@ -1,0 +1,170 @@
+<div class="surface-0 flex h-full bg-pri">
+    <div id="home" class="landing-wrapper overflow-hidden flex-1">
+        <div class="grid my-8 pt-2 md:pt-8 h-full">
+            <div class="col-12 lg:col-6 my-auto flex flex-column text-center lg:text-left lg:align-items-start"></div>
+
+            <div class="flex justify-center items-center col-12 lg:col-6 p-0 h-full">
+                <div class="card p-6 w-full max-w-md m-ca car_srt">
+
+
+                    <!-- Logo -->
+                    <img src="./../../../../../assets/resources/resCiap/logo_max.webp" class="mx-auto mb-4 logo"
+                        alt="Logo " />
+                    <h2 class="wel">{{ vs.mensaje }}</h2>
+                    <!-- Formulario de inicio de sesión -->
+                    <form>
+                        <span class="p-input-icon-left p-float-label lg:mb-5">
+                            <input id="float-input" class="customerInput" [(ngModel)]="dapp.user" name="user"
+                                type="text" pInputText />
+                            <i class="pi pi-user"></i>
+                            <label for="float-input">Usuario</label>
+                        </span>
+                        <!-- Tu archivo HTML (probablemente tu-componente.component.html) -->
+
+                        <span class="p-input-icon-left p-float-label lg:mb-5 p-input-icon-right">
+                            <i class="pi pi-lock"></i>
+                            <input id="float-input" class="customerInput" [(ngModel)]="dapp.pass" name="pass"
+                                [type]="fieldTextType ? 'text' : 'password'" pInputText />
+                            <i class="pi" [ngClass]="{'pi-eye-slash': !fieldTextType,     'pi-eye': fieldTextType }"
+                                (mouseenter)="fieldTextType = true" (mouseleave)="fieldTextType = false"
+                                (click)="ViewPassword()"></i>
+                            <label for="float-input">Contraseña</label>
+                        </span>
+
+                        <p class="olvc" (click)="showDialog()" style="cursor: help">
+                            {{ vs.mensaje_ol_c }}
+                        </p>
+
+                        <button pButton pRipple type="button" (click)="onLogin()" label="Iniciar sesión"
+                            class="p-button-success cust_j_center"></button>
+                        <br /><br />
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+<p-dialog [modal]="true" [(visible)]="display" [style]="{ width: '50vw' }" [maximizable]="true" [draggable]="false">
+    <div class="modalCustomer flex align-items-center justify-content-center">
+        <div class="formularioRender" [ngClass]="{'visble': DonClass===true, 'invisble': DonClass===false}">
+            <div class="flex flex-column">
+                <div class="flex align-items-center justify-content-center h-4rem  m-2">
+                    <div class="flex overflow-hidden">
+                        <div class="flex-none flex align-items-center justify-content-center">
+                            <i class="pi pi-lock icon"></i>
+                        </div>
+                        <div class="flex-grow-1 flex align-items-center justify-content-center">
+                            <h2 class="texReco">Recuperar contraseña</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex align-items-center justify-content-center">
+                    <p class="ti">Para restablecer su contraseña, ingrese su correo corporativo:</p>
+                </div>
+
+                <div class="flex align-items-center justify-content-center h-4rem m-2">
+                    <div class="flex overflow-hidden">
+                        <div
+                            class="flex-grow-1 md:flex-grow-0 flex align-items-center justify-content-center 2 px-5 py-3 border-round">
+                            <span class="p-input-icon-left p-float-label lg:mb-5 p-input-icon-right"
+                                style="margin-top: 40px;">
+                                <input id="float-input" class="customerInput" [(ngModel)]="correo" (blur)="onBlur()"
+                                    name="correo" type="text" pInputText />
+                                <i class="pi pi-at"></i>
+                                <label for="float-input">Correo</label>
+                                <i class="pi"
+                                    [ngClass]="{ 'pi-send': !anima, 'pi-spin pi-spinner': anima===false, 
+                                                            'pi-check-circle su': anima === true, 'pi-times-circle er': anima === 'err' }"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex align-items-center justify-content-center">
+                    <p class="err">{{msmErr}}</p>
+                </div>
+                <div class="grid formgrid  justify-content-center"
+                [ngClass]="{ 'invisble':otpView === false, 'visble':otpView === true}">
+
+                <div class="col-2 mb-2 lg:col-2 lg:mb-0">
+                    <input type="text" class="inputCustom" [(ngModel)]="otpNum.num1" pInputText placeholder="0"
+                        maxlength="1" #otpNum.num1>
+                </div>
+                <div class="col-2 mb-2 lg:col-2 lg:mb-0">
+                    <input type="text" class="inputCustom" [(ngModel)]="otpNum.num2" pInputText placeholder="0"
+                        maxlength="1" #otpNum.num2>
+                </div>
+                <div class="col-2 mb-2 lg:col-2 lg:mb-0">
+                    <input type="text" class="inputCustom" [(ngModel)]="otpNum.num3" pInputText placeholder="0"
+                        maxlength="1" #otpNum.num3>
+                </div>
+                <div class="col-2 mb-2 lg:col-2 lg:mb-0">
+                    <input type="text" class="inputCustom" [(ngModel)]="otpNum.num4" pInputText placeholder="0"
+                        maxlength="1" #otpNum.num4>
+                </div>
+
+            </div>
+
+            <div class="flex align-items-center justify-content-center"
+                [ngClass]="{ 'invisble':otpView === false, 'visble':otpView === true }">
+                <button pButton pRipple type="button" (click)="validarOptDataSend()" label="Validar"
+                    class="p-button-success cust_j_center">
+                </button>
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="RenderChange" [ngClass]="{'visble': DonClass===false, 'invisble': DonClass===true}">
+            <br> <br>
+            <div class="flex-grow-1 flex align-items-center justify-content-center">
+                <h2 class="TittleResPass">Ingresa la nueva contraseña:</h2>
+            </div>
+            <div class="flex align-items-center justify-content-center" style="margin-top: 17px;">
+
+                <span class="p-input-icon-left p-float-label lg:mb-5 p-input-icon-right">
+                    <i class="pi pi-lock"></i>
+                    <input id="float-input" class="customerInput" [(ngModel)]="dappResPass.contrasena" name="Cpass"
+                        [type]="fieldChPw ? 'text' : 'password'" pInputText (blur)="onBourNewPass()" />
+                    <i class="pi" [ngClass]="{'pi-eye-slash': !fieldChPw,     'pi-eye': fieldChPw }"
+                        (mouseenter)="fieldChPw = true" (mouseleave)="fieldChPw = false"
+                        (click)="ViewPasswordNew()"></i>
+                    <label for="float-input">Nueva contraseña</label>
+                </span>
+                
+            </div>
+            <div class="flex align-items-center justify-content-center">
+                <p class="err">{{ErrPws}}</p>
+                <br>
+            </div>
+
+            <div class="flex align-items-center justify-content-center">
+                <span class="p-input-icon-left p-float-label lg:mb-5 p-input-icon-right">
+                    <i class="pi pi-lock"></i>
+                    <input id="float-input" class="customerInput" [(ngModel)]="dappResPass.Recontrasena" name="Cpass"
+                        [type]="fieldChPw ? 'text' : 'password'" pInputText />
+                    <i class="pi" [ngClass]="{'pi-eye-slash': !fieldChPw,     'pi-eye': fieldChPw }"
+                        (mouseenter)="fieldChPw = true" (mouseleave)="fieldChPw = false"
+                        (click)="ViewPasswordNew()"></i>
+                    <label for="float-input">Confirmar contraseña</label>
+                </span>
+
+                
+            </div>
+            <div class="flex align-items-center justify-content-center">
+                <p class="err">{{ErrPwsR}}</p>
+            </div>
+            <div class="flex-grow-1 flex align-items-center justify-content-center">
+                <button pButton pRipple type="button" (click)="ValidarNuevaClave()" label="Guardar" class="p-button-success cust_j_center">
+                </button>
+            </div>
+        </div>
+
+    </div>
+</p-dialog>
